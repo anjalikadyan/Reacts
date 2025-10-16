@@ -1,42 +1,47 @@
-React.js
+# React js
 
 A JavaScript library for building user interfaces.
+Developed and maintained by Meta Platforms.
+Based on **component-based architecture**, making code reusable and easier to maintain.
+Uses **Virtual DOM** for efficient UI updates.
 
-Developed and maintained by Meta Platforms. React emphasizes reusable, composable components, declarative UIs, and efficient updates via the Virtual DOM.
+---
 
-Key Features
+### **Key Features:**
 
-- Component-based architecture
-- Declarative UI
-- One-way data flow (top-down data via props)
-- Fast rendering using Virtual DOM
-- Large ecosystem and community support
+* Component-based
+* Declarative UI
+* One-way data binding
+* Fast rendering using Virtual DOM
+* Strong community support
 
-Getting Started
+---
 
-- Prerequisites: Node.js (LTS) and npm or yarn.
-- Create a project:
+## **Components:**
 
-```bash
-npm create vite@latest my-app -- --template react
-cd my-app
-npm install
-npm run dev
-```
-
-Core Concepts
-
-Components
-
-- Function Components (preferred):
+### Function Components: Simple and widely used.
 
 ```jsx
 function Welcome() {
   return <h1>Hello, React!</h1>;
 }
+
+export default Welcome;
 ```
 
-- Class Components (legacy but useful to recognize):
+Usage:
+
+```jsx
+import Welcome from './Welcome';
+
+function App() {
+  return <Welcome />;
+}
+```
+
+---
+
+### Class Components: Less common today but good to know.
 
 ```jsx
 class Welcome extends React.Component {
@@ -44,205 +49,129 @@ class Welcome extends React.Component {
     return <h1>Hello, React!</h1>;
   }
 }
+
+export default Welcome;
 ```
 
-JSX Basics
-
-- JSX lets you write HTML-like syntax in JavaScript.
-- Wrap multiple elements in a single parent (e.g., a fragment `<>...</>`).
-- Use `{}` to embed JavaScript expressions.
-
-Props (Properties)
-
-- Pass data from parent to child; props are read-only.
+Usage:
 
 ```jsx
-function Greeting({ name }) {
-  return <h2>Hello, {name}!</h2>;
+import Welcome from './Welcome';
+
+function App() {
+  return <Welcome />;
+}
+```
+
+---
+
+## **Props (Properties)**
+
+* Used to pass data from parent to child component.
+
+```jsx
+function Greeting(props) {
+  return <h2>Hello, {props.name}!</h2>;
 }
 
-// Usage
-<Greeting name="Anjali" />
+export default Greeting;
 ```
 
-State
-
-- Local, mutable data managed within a component.
+Usage:
 
 ```jsx
-import { useState } from 'react';
+import Greeting from './Greeting';
 
-function Counter() {
-  const [count, setCount] = useState(0);
+function App() {
   return (
     <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <Greeting name="Anjali" />
+      <Greeting name="Rahul" />
     </div>
   );
 }
 ```
 
-Handling Events
+---
 
-- Use camelCase event names and pass a function reference.
+## **Styling in React:**
 
-```jsx
-function Button() {
-  function handleClick() {
-    console.log('Clicked');
-  }
-  return <button onClick={handleClick}>Click me</button>;
-}
-```
-
-Conditional Rendering
+### Inline styling
 
 ```jsx
-function Status({ isOnline }) {
-  return <span>{isOnline ? 'Online' : 'Offline'}</span>;
-}
+<h1 style={{ color: "blue", fontSize: "24px" }}>Hello</h1>
 ```
 
-Lists and Keys
+---
 
-- Use `key` to help React identify list items.
-
-```jsx
-const users = [
-  { id: 1, name: 'Ava' },
-  { id: 2, name: 'Ben' }
-];
-
-function UserList() {
-  return (
-    <ul>
-      {users.map(user => (
-        <li key={user.id}>{user.name}</li>
-      ))}
-    </ul>
-  );
-}
-```
-
-Styling in React
-
-- Inline styles:
-
-```jsx
-<h1 style={{ color: 'blue' }}>Hello</h1>
-```
-
-- External CSS:
+### External CSS
 
 ```jsx
 import './App.css';
-```
-
-- Scoped styling:
-  - CSS Modules: `import styles from './Button.module.css'`
-  - Styled Components: `npm install styled-components`
-
-Hooks (Functional Components)
-
-- `useState` — local state
-- `useEffect` — side effects (fetching, subscriptions)
-- `useMemo` — memoize expensive computations
-- `useCallback` — memoize functions to avoid re-renders
-- `useRef` — mutable refs and DOM access
-
-```jsx
-import { useEffect, useState } from 'react';
-
-function Users() {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    async function load() {
-      const res = await fetch('https://jsonplaceholder.typicode.com/users');
-      setUsers(await res.json());
-    }
-    load();
-  }, []); // runs once after mount
-
-  return <div>Total users: {users.length}</div>;
-}
-```
-
-Lifecycle (Class vs Hooks)
-
-- Class: `componentDidMount`, `componentDidUpdate`, `componentWillUnmount`.
-- Hooks: `useEffect` with appropriate dependency arrays to model lifecycle.
-
-Routing (Basics)
-
-```bash
-npm install react-router-dom
-```
-
-```jsx
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
-  return (
-    <BrowserRouter>
-      <nav>
-        <Link to="/">Home</Link> | <Link to="/about">About</Link>
-      </nav>
-      <Routes>
-        <Route path="/" element={<h1>Home</h1>} />
-        <Route path="/about" element={<h1>About</h1>} />
-      </Routes>
-    </BrowserRouter>
-  );
+  return <h1 className="title">Hello</h1>;
 }
 ```
 
-Forms (Controlled Inputs)
+```css
+/* App.css */
+.title {
+  color: red;
+  text-align: center;
+}
+```
+
+---
+
+## **CSS Modules or Styled Components for scoped styling:**
+
+### ✅ Use CSS Modules if you prefer separate CSS files.
 
 ```jsx
-import { useState } from 'react';
-
-function NameForm() {
-  const [name, setName] = useState('');
-  function handleSubmit(e) {
-    e.preventDefault();
-    alert(name);
-  }
-  return (
-    <form onSubmit={handleSubmit}>
-      <input value={name} onChange={e => setName(e.target.value)} />
-      <button type="submit">Submit</button>
-    </form>
-  );
+// Button.module.css
+.btn {
+  background-color: blue;
+  color: white;
+  padding: 10px;
+  border: none;
 }
 ```
 
-Performance Tips
+```jsx
+// Button.jsx
+import styles from './Button.module.css';
 
-- Split components and keep state minimal.
-- Use `React.memo` for pure child components.
-- Memoize expensive work with `useMemo` and handlers with `useCallback`.
-- Virtualize long lists (`react-window`, `react-virtualized`).
+function Button() {
+  return <button className={styles.btn}>Click Me</button>;
+}
 
-Testing (Basics)
+export default Button;
+```
+
+---
+
+### ✅ Use Styled Components if you like CSS inside JavaScript and want easy dynamic styles.
 
 ```bash
-npm install --save-dev @testing-library/react @testing-library/jest-dom
+npm install styled-components
 ```
 
 ```jsx
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import styled from 'styled-components';
 
-test('renders greeting', () => {
-  render(<h1>Hello</h1>);
-  expect(screen.getByText('Hello')).toBeInTheDocument();
-});
+const Button = styled.button`
+  background-color: green;
+  color: white;
+  padding: 10px;
+  border: none;
+`;
+
+function App() {
+  return <Button>Click Me</Button>;
+}
+
+export default App;
 ```
 
-Further Reading
 
-- Official Docs: `https://react.dev`
-- React Router: `https://reactrouter.com`
-- Styled Components: `https://styled-components.com`
