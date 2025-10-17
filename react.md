@@ -173,5 +173,56 @@ function App() {
 
 export default App;
 ```
+# Routing in React
+
+--it is allows your application to navigate between different components or pages without reloading the browser.  
+--its make web app behave like a single-page application (SPA) - fast and smooth.
+
+## Install React Router
+```bash
+npm install react-router-dom
+````
+
+## Example
+
+```jsx
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+
+function Home() {
+  return <h1>Home Page</h1>;
+}
+
+function About() {
+  return <h1>About Page</h1>;
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <nav>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
+```
+
+## How it works
+
+--`BrowserRouter` wraps the entire app to enable routing.
+--`Link` is used to navigate between pages without reloading.
+--`Routes` and `Route` tell React which component to show for each URL path.
+--the page does not reload, only the content changes.
+
+```
+
 
 
