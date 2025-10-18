@@ -173,6 +173,64 @@ function App() {
 
 export default App;
 ```
+# Module in React:
+
+A module is a file that contains code (components, functions, constants, styles, etc.) that you can export and import in other files. modules help keep code organized, reusable, and easier to maintain.
+
+## Example of Module
+```jsx
+// Message.js
+export function Message() {
+  return <h1>Hello from Module!</h1>;
+}
+````
+
+```jsx
+// App.js
+import { Message } from "./Message";
+
+function App() {
+  return (
+    <div>
+      <Message />
+    </div>
+  );
+}
+
+export default App;
+```
+
+---
+
+# Props (Properties):
+
+Props are how a parent component passes data and behavior to a child component. Props are read-only inside the child — the child should not mutate them.
+
+## Example of Props
+
+```jsx
+// Greeting.js
+function Greeting(props) {
+  return <h2>Hello, {props.name}!</h2>;
+}
+
+export default Greeting;
+```
+
+```jsx
+// App.js
+import Greeting from "./Greeting";
+
+function App() {
+  return (
+    <div>
+      <Greeting name="Anjali" />
+    </div>
+  );
+}
+
+export default App;
+
 # Routing in React
 
 --it is allows your application to navigate between different components or pages without reloading the browser.  
@@ -221,8 +279,6 @@ export default App;
 --`Link` is used to navigate between pages without reloading.
 --`Routes` and `Route` tell React which component to show for each URL path.
 --the page does not reload, only the content changes.
-
-```
 
 
 
